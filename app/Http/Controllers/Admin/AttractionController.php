@@ -40,23 +40,31 @@ class AttractionController extends Controller
         $this->validate(request(), [
             'name_fa'       => 'required',
             'name_en'       => 'required',
-            'image'         => 'image|max:3072', //maximum size 3MB
-            'video'         => 'mime:mp4,mov,ogg|max:10240', //Maximum size 10MB
+            // 'image'         => 'mimes:jpeg,bmp,png,jpg|max:3072', //maximum size 3MB
+            'video'         => 'mimes:mp4,mov,ogg|max:10240', //Maximum size 10MB
             'description'   => 'required',
-            'lat'           => 'required',
-            'lat'           => 'required',
         ]);
 
+        if($request->hasFile('image')){
+            $className = Attraction::class;
+            $images = json_encode(uploadFile($request->image, $className));
+        }
+        if($request->hasFile('video')){
+            $className = Attraction::class;
+            $video = uploadVideo($request->video, $className);
+        }
         $data = [
             'name_fa'       => request('name_fa'),
             'name_en'       => request('name_en'),
             'slug'          => request('slug'),
-            'image'         => $image,
+            'image'         => $images,
             'video'         => $video,
             'description'   => request('description'),
             'lat'           => request('lat'),
-            'lat'           => request('lang'),
+            'long'           => request('long'),
         ];
+        Attraction::create($data);
+        return redirect()->route('attraction.index');
     }
 
     /**
@@ -94,7 +102,7 @@ class AttractionController extends Controller
             'name_fa'       => 'required',
             'name_en'       => 'required',
             'image'         => 'image|max:3072', //maximum size 3MB
-            'video'         => 'mime:mp4,mov,ogg|max:10240', //Maximum size 10MB
+            'video'         => 'mimetypes:video/avi,video/mpeg,video/quicktime|max:10240', //Maximum size 10MB
             'description'   => 'required',
             'lat'           => 'required',
             'lat'           => 'required',
