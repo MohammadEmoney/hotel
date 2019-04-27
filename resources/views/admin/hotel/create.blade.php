@@ -27,7 +27,7 @@
                 </div>
                 <!-- /.box-header -->
                     <!-- form start -->
-                    <form id="update_profile" class="floating-labels" method="post" action="{{ route('city.store') }}" enctype="multipart/form-data">
+                    <form id="update_profile" class="floating-labels" method="post" action="{{ route('hotel.store') }}" enctype="multipart/form-data">
                         <div class="box-body">
                             {{ csrf_field() }}
                             <div class="form-group m-b-40">
@@ -47,19 +47,56 @@
 
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="city">شهر</label>
-                                    <select name="city_id" class="form-control" id="city">
-                                        <option value="city_id">city</option>
+                                    <label for="country">کشور</label>
+                                    <select name="country_id" class="form-control" id="country">
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->id }}">{{ $country->name_fa }}</option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="area">محله</label>
-                                    <select name="area_id" class="form-control" id="area">
-                                        <option value="area_id">area</option>
+                                    <label for="city">شهر</label>
+                                    <select name="city_id" class="form-control" id="city">
+                                        @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}">{{ $city->name_fa }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="area">محله</label>
+                                    <select name="area_id" class="form-control" id="area">
+                                        @foreach ($areas as $area)
+                                            <option value="{{ $area->id}}">{{ $area->name_fa }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="provider">تامین کننده</label>
+                                    <select name="provider_id" class="form-control" id="provider">
+                                        @foreach ($providers as $provider)
+                                            <option value="{{ $provider->id }}">{{ $provider->name_fa }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group m-b-40">
+                                <label for="image">تصاویر</label>
+                                <input type="file" class="form-control" id="image" name="image[]" multiple><span class="highlight"></span> <span class="bar"></span>
+                            </div>
+
+                            <div class="form-group m-b-40">
+                                <label for="video">ویدئو</label>
+                                <input type="file" class="form-control" id="video" name="video"><span class="highlight"></span> <span class="bar"></span>
+                            </div>
+
+                            <div id="googleMap" style="width:100%;height:400px;"></div>
+                            <input type="hidden" id="lat" name="lat">
+                            <input type="hidden" id="long" name="long">
 
                             <div class="form-group m-b-40">
                                 <label for="description">توضیحات</label>
@@ -87,5 +124,22 @@
                 $('#slug').val($slug);
             });
         });
+
+        function myMap() {
+        var mapProp= {
+            center:new google.maps.LatLng(51.508742,-0.120850),
+            zoom:5,
+        };
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+        google.maps.event.addListener(map, 'click', function(event) {
+            $("#lat").val(event.latLng.lat());
+            $("#long").val(event.latLng.lng());
+        // alert(event.latLng.lat() + ", " + event.latLng.lng());
+        });
+
+        }
     </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=myMap"></script>
 @endsection

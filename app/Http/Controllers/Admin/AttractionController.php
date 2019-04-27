@@ -40,7 +40,8 @@ class AttractionController extends Controller
         $this->validate(request(), [
             'name_fa'       => 'required',
             'name_en'       => 'required',
-            // 'image'         => 'mimes:jpeg,bmp,png,jpg|max:3072', //maximum size 3MB
+            'image'         => 'required',
+            'image.*'       => 'image|mimes:jpeg,png,jpg,gif,svg|max:3078', //Maximum size 3MB
             'video'         => 'mimes:mp4,mov,ogg|max:10240', //Maximum size 10MB
             'description'   => 'required',
         ]);

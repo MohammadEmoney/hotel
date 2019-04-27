@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Hotel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Country;
+use App\City;
+use App\Area;
+use App\Provider;
 
 class HotelController extends Controller
 {
@@ -15,7 +19,8 @@ class HotelController extends Controller
      */
     public function index()
     {
-        return view('admin.hotel.index');
+        $hotels = Hotel::all();
+        return view('admin.hotel.index', compact('hotels'));
     }
 
     /**
@@ -25,7 +30,11 @@ class HotelController extends Controller
      */
     public function create()
     {
-        return view('admin.hotel.create');
+        $countries = Country::all();
+        $cities = City::all();
+        $areas = Area::all();
+        $providers = Provider::all();
+        return view('admin.hotel.create', compact('countries', 'cities', 'areas', 'providers'));
     }
 
     /**

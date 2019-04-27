@@ -74,7 +74,7 @@
 
                         </div> <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-success waves-effect waves-light">دخیره</button>
+                            <button type="submit" class="btn btn-success waves-effect waves-light">ذخیره</button>
                             <a href="{{ route('dashboard') }}" class="btn btn-inverse waves-effect waves-light">انصراف</a>
                         </div>
                     </form>

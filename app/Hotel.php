@@ -22,4 +22,20 @@ class Hotel extends Model
         'video',
         'rates'
     ];
+
+    public function city(){
+        return $this->belongsTo(City::class);
+    }
+
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
+    public function area(){
+        return $this->belongsTo(Area::class);
+    }
+
+    public function provider(){
+        return $this->hasMany(Provider::class);
+    }
 }
