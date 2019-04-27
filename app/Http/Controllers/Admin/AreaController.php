@@ -77,7 +77,8 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
-        return view('admin.area.edit', compact('area'));
+        $cities = City::all();
+        return view('admin.area.edit', compact('area', 'cities'));
     }
 
     /**
@@ -89,7 +90,7 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
-        $this->validate(requset(), [
+        $this->validate(request(), [
             'name_fa'       => 'required',
             'name_en'       => 'required|regex:/^[a-zA-Z]+$/u',
             'city_id'       => 'required',

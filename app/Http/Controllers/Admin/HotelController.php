@@ -48,12 +48,19 @@ class HotelController extends Controller
         $this->validate(request(), [
             'name_fa'       => 'required',
             'name_en'       => 'required',
-            'lat'           => 'integer',
-            'long'          => 'integer',
             'description'   => 'required',
             'image'         => 'image|max:3072', //Image Maximum Size 3MB
             'video'         => 'mime:mp4,mov,ogg|max:10240', //Image Maximum Size 10MB
         ]);
+
+        if($request->hasFile('image')){
+            $className = Attraction::class;
+            $images = json_encode(uploadFile($request->image, $className));
+        }
+        if($request->hasFile('video')){
+            $className = Attraction::class;
+            $video = uploadVideo($request->video, $className);
+        }
 
         $data = [
             'name_fa'       => requset('name_fa'),
@@ -62,7 +69,7 @@ class HotelController extends Controller
             'lat'           => requset('lat'),
             'long'          => requset('long'),
             'description'   => requset('description'),
-            'image'         => $image,
+            'image'         => $images,
             'video'         => $video,
             'area_id'       => request('area_id'),
             'city_id'       => request('city_id'),
