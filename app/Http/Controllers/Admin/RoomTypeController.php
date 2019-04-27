@@ -36,7 +36,17 @@ class RoomTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'type'      => 'required',
+            'capacity'  => 'required'
+        ]);
+
+        $data = [
+            'type'      => request('type'),
+            'capacity'  => request('capacity')
+        ];
+        RoomType::create($data);
+        return redirect()->route('room-typ.index');
     }
 
     /**
@@ -58,7 +68,7 @@ class RoomTypeController extends Controller
      */
     public function edit(RoomType $roomType)
     {
-        //
+        return view('admin.roomtype.edit', compact('roomType'));
     }
 
     /**
@@ -70,7 +80,13 @@ class RoomTypeController extends Controller
      */
     public function update(Request $request, RoomType $roomType)
     {
-        //
+        $this->validate(request(), [
+            'type'      => 'required',
+            'capacity'  => 'required'
+        ]);
+        $data = $request->all();
+        $roomType->update($data);
+        return redirect()->route('room-typ.index');
     }
 
     /**
@@ -81,6 +97,7 @@ class RoomTypeController extends Controller
      */
     public function destroy(RoomType $roomType)
     {
-        //
+        $roomType->delete();
+        return redirect()->route('room-typ.index');
     }
 }

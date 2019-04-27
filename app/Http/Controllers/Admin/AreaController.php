@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Area;
+use App\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,8 @@ class AreaController extends Controller
      */
     public function index()
     {
-        return view('admin.area.index');
+        $areas = Area::all();
+        return view('admin.area.index', compact('areas'));
     }
 
     /**
@@ -25,7 +27,8 @@ class AreaController extends Controller
      */
     public function create()
     {
-        return view('admin.area.create');
+        $cities = City::all();
+        return view('admin.area.create', compact('cities'));
     }
 
     /**
@@ -36,7 +39,7 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(requset(), [
+        $this->validate(request(), [
             'name_fa'       => 'required',
             'name_en'       => 'required|regex:/^[a-zA-Z]+$/u',
             'city_id'       => 'required',
@@ -46,7 +49,8 @@ class AreaController extends Controller
         $data = [
             'name_fa'       => request("name_fa"),
             'name_en'       => request('name_en'),
-            'description'   => request('desription'),
+            'slug'          => request('slug'),
+            'description'   => request('description'),
             'city_id'       => request('city_id'),
         ];
 

@@ -15,7 +15,8 @@ class CountryController extends Controller
      */
     public function index()
     {
-        return view('admin.country.index');
+        $countries = Country::all();
+        return view('admin.country.index', compact('countries'));
     }
 
     /**
@@ -44,10 +45,10 @@ class CountryController extends Controller
             'description'   => 'required'
         ]);
 
-
         $data = [
             'name_fa'       => request('name_fa'),
             'name_en'       => request('name_en'),
+            'slug'           => request('slug'),
             'lat'           => request('lat'),
             'long'          => request('long'),
             'description'   => request('description')

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Country;
 
 class CityController extends Controller
 {
@@ -15,7 +16,8 @@ class CityController extends Controller
      */
     public function index()
     {
-        return view('admin.city.index');
+        $cities = City::all();
+        return view('admin.city.index', compact('cities'));
     }
 
     /**
@@ -25,7 +27,8 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('admin.city.create');
+        $countries = Country::all();
+        return view('admin.city.create', compact('countries'));
     }
 
     /**
@@ -39,8 +42,6 @@ class CityController extends Controller
         $this->validate(request(), [
             'name_fa'       => 'required',
             'name_en'       => 'required',
-            'lat'           => 'integer',
-            'long'          => 'integer',
             'description'   => 'required'
         ]);
 
@@ -49,8 +50,8 @@ class CityController extends Controller
             'name_fa'       => request('name_fa'),
             'name_en'       => request('name_en'),
             'slug'          => request('slug'),
-            'lat'           => request('lat'),
-            'long'          => request('long'),
+            'lat'           => '41.008240',
+            'long'          => '28.978359',
             'country_id'    => request('country_id'),
             'description'   => request('description')
         ];

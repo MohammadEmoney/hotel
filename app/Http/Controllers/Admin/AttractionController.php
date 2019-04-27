@@ -15,7 +15,8 @@ class AttractionController extends Controller
      */
     public function index()
     {
-        return view('admin.attraction.index');
+        $attractions = Attraction::all();
+        return view('admin.attraction.index', compact('attractions'));
     }
 
     /**

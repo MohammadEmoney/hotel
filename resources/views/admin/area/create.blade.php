@@ -27,7 +27,16 @@
                 </div>
                 <!-- /.box-header -->
                     <!-- form start -->
-                    <form id="update_profile" class="floating-labels" method="post" action="{{ route('city.store') }}" enctype="multipart/form-data">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form id="update_profile" class="floating-labels" method="post" action="{{ route('area.store') }}" enctype="multipart/form-data">
                         <div class="box-body">
                             {{ csrf_field() }}
                             <div class="form-group m-b-40">
@@ -47,7 +56,9 @@
                             <div class="form-group m-b-40">
                                 <label for="city">شهر</label>
                                 <select name="city_id" class="form-control" id="city">
-                                    <option value="city_id">city</option>
+                                    @foreach($cities as $city)
+                                        <option value="{{ $city->id }}">{{ $city->name_fa }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

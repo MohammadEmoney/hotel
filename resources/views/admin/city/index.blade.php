@@ -23,31 +23,34 @@
         <table id="product-table" class="table">
             <thead>
             <tr>
-                <th>Name fa</th>
-                <th>Nam en</th>
-                <th>description</th>
-                <th>lat</th>
-                <th>long</th>
+                <th>نام فارسی</th>
+                <th>نام انگلیسی</th>
+                <th>توضیحات</th>
+                <th>کشور</th>
+                <th>Latitude</th>
+                <th>Longtitude</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-
-                <tr>
-                    <td>name fa</td>
-                    <td>name en</td>
-                    <td>description</td>
-                    <td>lat</td>
-                    <td>long</td>
-                    <td class="pull-left d-flex">
-                        <a href="#" class="btn btn-warning">Edit</a>
-                        <form action="#" class="delete-form">
-                            @csrf
-                            @method('DELETE')
-                            <a type="submit" class="btn btn-danger ml-2">Delete</a>
-                        </form>
-                    </td>
-                </tr>
+                @foreach($cities as $city)
+                    <tr>
+                        <td>{{ $city->name_fa }}</td>
+                        <td>{{ $city->name_en }}</td>
+                        <td>{{ $city->description }}</td>
+                        <td>{{ $city->country->name_fa }}</td>
+                        <td>{{ $city->lat }}</td>
+                        <td>{{ $city->long }}</td>
+                        <td class="pull-left d-flex">
+                            <a href="{{ route('city.edit', ['id' => $city->id]) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('city.destroy', ['id' => $city->id]) }}" class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <a type="submit" class="btn btn-danger ml-2">Delete</a>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

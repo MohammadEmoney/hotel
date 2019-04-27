@@ -27,6 +27,15 @@
                 </div>
                 <!-- /.box-header -->
                     <!-- form start -->
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form id="update_profile" class="floating-labels" method="post" action="{{ route('city.store') }}" enctype="multipart/form-data">
                         <div class="box-body">
                             {{ csrf_field() }}
@@ -47,9 +56,15 @@
                             <div class="form-group m-b-40">
                                 <label for="country">کشور</label>
                                 <select name="country_id" class="form-control" id="country">
-                                    <option value="country_id">country</option>
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->id }}">{{ $country->name_fa}}</option>
+                                    @endforeach
                                 </select>
                             </div>
+
+                            <div id="googleMap" style="width:100%;height:400px;"></div>
+                            <input type="hidden" name="lat">
+                            <input type="hidden" name="long">
 
                             <div class="form-group m-b-40">
                                 <label for="description">توضیحات</label>
@@ -77,5 +92,20 @@
                 $('#slug').val($slug);
             });
         });
+
+        function myMap() {
+        var mapProp= {
+            center:new google.maps.LatLng(51.508742,-0.120850),
+            zoom:5,
+        };
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+        google.maps.event.addListener(map, 'click', function(event) {
+            $("#lat").val(event.latLng.lat());
+            $("#long").val(event.latLng.lng());
+        // alert(event.latLng.lat() + ", " + event.latLng.lng());
+        });
+    }
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIgG6xwixzeP0vQeddlqBX41JAOmOEU5g&callback=myMap"></script>
 @endsection

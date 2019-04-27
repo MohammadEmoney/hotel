@@ -19,35 +19,38 @@
 
 @section('content')
 <div class="container">
-<a href="{{ route('city.create') }}" class="btn btn-primary">add</a>
+<a href="{{ route('area.create') }}" class="btn btn-primary">add</a>
         <table id="product-table" class="table">
             <thead>
             <tr>
-                <th>Name fa</th>
-                <th>Nam en</th>
-                <th>description</th>
-                <th>lat</th>
-                <th>long</th>
+                <th>نام فارسی</th>
+                <th>نام انگلیسی</th>
+                <th>توضیحات</th>
+                <th>شهر</th>
+                <th>Latitude</th>
+                <th>Longtitude</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-
-                <tr>
-                    <td>name fa</td>
-                    <td>name en</td>
-                    <td>description</td>
-                    <td>lat</td>
-                    <td>long</td>
-                    <td class="pull-left d-flex">
-                        <a href="#" class="btn btn-warning">Edit</a>
-                        <form action="#" class="delete-form">
-                            @csrf
-                            @method('DELETE')
-                            <a type="submit" class="btn btn-danger ml-2">Delete</a>
-                        </form>
-                    </td>
-                </tr>
+                @foreach($areas as $area)
+                    <tr>
+                        <td>{{ $area->name_fa }}</td>
+                        <td>{{ $area->name_en }}</td>
+                        <td>{{ $area->description }}</td>
+                        <td>{{ $area->city->name_fa }}</td>
+                        <td>{{ $area->lat }}</td>
+                        <td>{{ $area->long }}</td>
+                        <td class="pull-left d-flex">
+                            <a href="{{ route('area.edit', ['id' => $area->id]) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('area.destroy', ['id' => $area->id]) }}" class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <a type="submit" class="btn btn-danger ml-2">Delete</a>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -27,6 +27,15 @@
                 </div>
                 <!-- /.box-header -->
                     <!-- form start -->
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form id="update_profile" class="floating-labels" method="post" action="{{ route('attraction.store') }}" enctype="multipart/form-data">
                         <div class="box-body">
                             {{ csrf_field() }}
@@ -43,6 +52,20 @@
                                 <label for="slug">slug</label>
                                 <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" required><span class="highlight"></span> <span class="bar"></span>
                             </div>
+
+                            <div class="form-group m-b-40">
+                                <label for="image">تصاویر</label>
+                                <input type="file" class="form-control" id="image" name="image[]"><span class="highlight"></span> <span class="bar"></span>
+                            </div>
+
+                            <div class="form-group m-b-40">
+                                <label for="video">ویدئو</label>
+                                <input type="file" class="form-control" id="video" name="video"><span class="highlight"></span> <span class="bar"></span>
+                            </div>
+
+                            <div id="googleMap" style="width:100%;height:400px;"></div>
+                            <input type="hidden" id="lat" name="lat">
+                            <input type="hidden" id="long" name="long">
 
                             <div class="form-group m-b-40">
                                 <label for="description">توضیحات</label>
@@ -70,6 +93,24 @@
                 $('#slug').val($slug);
             });
         });
+
+        function myMap() {
+        var mapProp= {
+            center:new google.maps.LatLng(51.508742,-0.120850),
+            zoom:5,
+        };
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+        google.maps.event.addListener(map, 'click', function(event) {
+            $("#lat").val(event.latLng.lat());
+            $("#long").val(event.latLng.lng());
+        // alert(event.latLng.lat() + ", " + event.latLng.lng());
+        });
+
+        }
+
+        // api_key = AIzaSyCIgG6xwixzeP0vQeddlqBX41JAOmOEU5g
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIgG6xwixzeP0vQeddlqBX41JAOmOEU5g&callback=myMap"></script>
 @endsection
 

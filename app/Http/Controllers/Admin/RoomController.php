@@ -81,7 +81,7 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        
+
     }
 
     /**
@@ -92,6 +92,7 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        //
+        $room->delete();
+        return redirect()->route('room.index');
     }
 }
