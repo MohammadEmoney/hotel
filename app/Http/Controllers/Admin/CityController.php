@@ -79,7 +79,8 @@ class CityController extends Controller
      */
     public function edit(City $city)
     {
-        return view('admin.city.edit', compact('city'));
+        $countries = Country::all();
+        return view('admin.city.edit', compact('city', 'countries'));
     }
 
     /**

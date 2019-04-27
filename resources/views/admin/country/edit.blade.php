@@ -1,19 +1,19 @@
 @extends('layouts.main')
 
 @section('title')
-<title>داشبرد | ویرایش {{ country->name }}</title>
+<title>داشبرد | ویرایش {{ $country->name_fa}} </title>
 @endsection
 
 @section('page-navigation')
 <section class="content-header">
         <h1>
-          افزودن کشور
+            ویرایش {{ $country->name_fa }}
           <small>کنترل پنل</small>
         </h1>
         <ol class="breadcrumb">
-          <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> خانه</a></li>
-          <li ><a href="{{ route('country.index') }}">کشورها</a></li>
-          <li class="active">ویرایش</li>
+            <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> خانه</a></li>
+            <li ><a href="{{ route('country.index') }}">کشورها</a></li>
+            <li class="active">ویرایش {{ $country->name_fa }}</li>
         </ol>
       </section>
 @endsection
@@ -23,11 +23,11 @@
         <div class="col-md-6 col-md-offset-3 shadow py-3 my-3">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">ویرایش کشور</h3>
+                    <h3 class="box-title">ویرایش {{ $country->name_fa }}</h3>
                 </div>
                 <!-- /.box-header -->
                     <!-- form start -->
-                    <form id="update_profile" class="floating-labels" method="post" action="{{ route('country.upadte') }}" enctype="multipart/form-data">
+                    <form id="update_profile" class="floating-labels" method="post" action="{{ route('country.update', ['id' => $country->id]) }}" enctype="multipart/form-data">
                         <div class="box-body">
                             {{ csrf_field() }}
                             @method('PATCH')

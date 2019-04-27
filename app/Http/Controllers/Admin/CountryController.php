@@ -106,7 +106,7 @@ class CountryController extends Controller
             'description'   => request('description')
         ];
 
-        $country::update($data);
+        $country->update($data);
         return redirect()->route('country.index');
     }
 

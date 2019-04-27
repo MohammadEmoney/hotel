@@ -49,7 +49,7 @@
                                 <label for="city">شهر</label>
                                 <select name="city_id" class="form-control" id="city">
                                     @foreach($cities as $city)
-                                        <option value="{{ $city->id }}" {{ $city->id == $area->id ? "selected" : "" }}>{{ $city->name_fa }}</option>
+                                        <option value="{{ $city->id }}" {{ $city->id == $area->city->id ? "selected" : "" }}>{{ $city->name_fa }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -1,19 +1,19 @@
 @extends('layouts.main')
 
 @section('title')
-<title>داشبرد | افزودن جاذبه</title>
+<title>داشبرد | افزودن هتل</title>
 @endsection
 
 @section('page-navigation')
 <section class="content-header">
         <h1>
-          افزودن جاذبه
+          افزودن هتل
           <small>کنترل پنل</small>
         </h1>
         <ol class="breadcrumb">
           <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> خانه</a></li>
-          <li ><a href="{{ route('attraction.index') }}">جاذبه ها</a></li>
-          <li class="active">افزودن جاذبه</li>
+          <li ><a href="{{ route('city.index') }}">هتل ها</a></li>
+          <li class="active">افزودن هتل</li>
         </ol>
       </section>
 @endsection
@@ -23,42 +23,70 @@
         <div class="col-md-6 col-md-offset-3 shadow py-3 my-3">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">افزودن جاذبه</h3>
+                    <h3 class="box-title">افزودن هتل</h3>
                 </div>
                 <!-- /.box-header -->
                     <!-- form start -->
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    <form id="update_profile" class="floating-labels" method="post" action="{{ route('attraction.store') }}" enctype="multipart/form-data">
+                    <form id="update_profile" class="floating-labels" method="post" action="{{ route('hotel.store') }}" enctype="multipart/form-data">
                         <div class="box-body">
                             {{ csrf_field() }}
                             <div class="form-group m-b-40">
-                                <label for="name_fa">نام فارسی</label>
+                                <label for="name_fa">نام فارسی هتل</label>
                                 <input type="text" class="form-control" id="name_fa" name="name_fa" value="{{ old('name_fa') }}" required><span class="highlight"></span> <span class="bar"></span>
                             </div>
                             <div class="form-group m-b-40">
-                                <label for="name_en">نام انگلیسی</label>
+                                <label for="name_en">نام انگلیسی هتل</label>
                                 <input type="text" class="form-control" id="name_en" name="name_en" value="{{ old('name_en') }}" required><span class="highlight"></span> <span class="bar"></span>
                             </div>
 
                             <div class="form-group m-b-40">
                                 <label for="slug">slug</label>
                                 <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" required><span class="highlight"></span> <span class="bar"></span>
+                            </div>
 
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="country">کشور</label>
+                                    <select name="country_id" class="form-control" id="country">
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->id }}">{{ $country->name_fa }}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="city">شهر</label>
+                                    <select name="city_id" class="form-control" id="city">
+                                        @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}">{{ $city->name_fa }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="area">محله</label>
+                                    <select name="area_id" class="form-control" id="area">
+                                        @foreach ($areas as $area)
+                                            <option value="{{ $area->id}}">{{ $area->name_fa }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="provider">تامین کننده</label>
+                                    <select name="provider_id" class="form-control" id="provider">
+                                        @foreach ($providers as $provider)
+                                            <option value="{{ $provider->id }}">{{ $provider->name_fa }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-group m-b-40">
                                 <label for="image">تصاویر</label>
-                                <input accept='image/*' onchange='openFile(event)' type="file" class="form-control" id="image" name="image[]" multiple><span class="highlight"></span> <span class="bar"></span>
-                                <!-- Trigger the modal with a button -->
-                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                                <input type="file" class="form-control" id="image" name="image[]" multiple><span class="highlight"></span> <span class="bar"></span>
                             </div>
 
                             <div class="form-group m-b-40">
@@ -77,75 +105,25 @@
 
                         </div> <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-success waves-effect waves-light">ذخیره</button>
-                            <a href="{{ route('dashboard') }}" class="btn btn-inverse waves-effect waves-light">انصراف</a>
+                            <button type="submit" class="btn btn-success waves-effect waves-light">افزودن</button>
+                            <a href="{{ route('dashboard') }}" class="btn btn-inverse waves-effect waves-light">لغو</a>
                         </div>
                     </form>
 
             </div><!-- box-primary -->
         </div><!-- /.row -->
     </section>
-
-
-    {{-- MOdal ShOW ImAGe --}}
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-                <div id="preImg"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-            </div>
-
-        </div>
-          </div>
 @endsection
 
 @section('scripts')
     <script>
         $(document).ready(function () {
             $('#name_en').on('keyup', () => {
-                $value =  $('#name_en').val();
+                $value =  $('#name').val();
                 $slug = $value.replace(/\s/gm, '-');
                 $('#slug').val($slug);
             });
         });
-
-        let openFile = function(event) {
-            var preview = document.querySelector('#preImg');
-            var files   = document.querySelector('#image').files;
-
-            function readAndPreview(file) {
-
-                // Make sure `file.name` matches our extensions criteria
-                if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
-                var reader = new FileReader();
-
-                reader.addEventListener("load", function () {
-                        var image = new Image();
-                        image.height = 100;
-                        image.title = file.name;
-                        image.src = this.result;
-                        preview.appendChild( image );
-                    }, false);
-
-                    reader.readAsDataURL(file);
-                }
-
-            }
-
-            if (files) {
-                [].forEach.call(files, readAndPreview);
-            }
-        };
 
         function myMap() {
         var mapProp= {
@@ -162,6 +140,6 @@
 
         }
     </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=myMap"></script>
 @endsection
-
