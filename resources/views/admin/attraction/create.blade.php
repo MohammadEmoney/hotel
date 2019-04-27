@@ -55,7 +55,7 @@
 
                             <div class="form-group m-b-40">
                                 <label for="image">تصاویر</label>
-                                <input type="file" class="form-control" id="image" name="image[]"><span class="highlight"></span> <span class="bar"></span>
+                                <input type="file" class="form-control" id="image" name="image[]" multiple><span class="highlight"></span> <span class="bar"></span>
                             </div>
 
                             <div class="form-group m-b-40">
@@ -108,9 +108,7 @@
         });
 
         }
-
-        // api_key = AIzaSyCIgG6xwixzeP0vQeddlqBX41JAOmOEU5g
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIgG6xwixzeP0vQeddlqBX41JAOmOEU5g&callback=myMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=myMap"></script>
 @endsection
 
