@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\RoomType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\BedType;
 
 class RoomTypeController extends Controller
 {
@@ -15,7 +16,8 @@ class RoomTypeController extends Controller
      */
     public function index()
     {
-        return view('admin.roomtype.index');
+        $types = RoomType::all();
+        return view('admin.roomtype.index', compact('types'));
     }
 
     /**
@@ -25,7 +27,8 @@ class RoomTypeController extends Controller
      */
     public function create()
     {
-        return view('admin.roomtype.create');
+        $bed_types = BedType::all();
+        return view('admin.roomtype.create', compact('bed_types'));
     }
 
     /**
@@ -36,6 +39,7 @@ class RoomTypeController extends Controller
      */
     public function store(Request $request)
     {
+        dd(request('capacity'));
         $this->validate(request(), [
             'type'      => 'required',
             'capacity'  => 'required'

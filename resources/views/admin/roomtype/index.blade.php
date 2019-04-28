@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-<title>داشبرد | هتل ها</title>
+<title>داشبرد | نوع اتاق</title>
 @endsection
 
 @section('page-navigation')
@@ -12,14 +12,15 @@
         </h1>
         <ol class="breadcrumb">
           <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> خانه</a></li>
-          <li class="active">هتل ها</li>
+          <li><a href="{{ route('room.index') }}">اطلاعات اتاق ها</a></li>
+          <li class="active">نوع اتاق</li>
         </ol>
       </section>
 @endsection
 
 @section('content')
 <div class="container">
-<a href="{{ route('hotel.create') }}" class="btn btn-primary">add</a>
+<a href="{{ route('room-type.create') }}" class="btn btn-primary">add</a>
         <table id="product-table" class="table">
             <thead>
             <tr>
@@ -29,14 +30,13 @@
             </tr>
             </thead>
             <tbody>
-                @foreach($hotels as $hotel)
+                @foreach($types as $type)
                     <tr>
-                        <td>{{ $hotel->id }}</td>
-                        <td>{{ $hotel->name_fa }} | {{ $hotel->city->name_fa }} - {{ $hotel->area->name_fa }}</td>
+                        <td>{{ $type->id }}</td>
+                        <td>{{ $type->type }} </td>
                         <td class="pull-left d-flex">
-                            <a href="{{ route('hotel.edit', ['id' => $hotel->id]) }}" class="btn btn-warning">Edit</a>
-                            <a href="{{ route('room.index') }}" class="btn btn-success">اطلاعات اتاق ها</a>
-                            <form action="{{ route('hotel.destroy', ['id' => $hotel->id]) }}" class="delete-form">
+                            <a href="{{ route('room-type.edit', ['id' => $type->id]) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('room-type.destroy', ['id' => $type->id]) }}" class="delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <a type="submit" class="btn btn-danger ml-2">Delete</a>

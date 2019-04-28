@@ -39,6 +39,7 @@
                     <form id="update_profile" class="floating-labels" method="post" action="{{ route('attraction.update', ['id' => $attraction->id]) }}" enctype="multipart/form-data">
                         <div class="box-body">
                             {{ csrf_field() }}
+                            @method('PATCH')
                             <div class="form-group m-b-40">
                                 <label for="name_fa">نام فارسی</label>
                                 <input type="text" class="form-control" id="name_fa" name="name_fa" value="{{ $attraction->name_fa }}" required><span class="highlight"></span> <span class="bar"></span>
@@ -59,12 +60,21 @@
                                 <input accept='image/*' onchange='openFile(event)' type="file" class="form-control" id="image" name="image[]" multiple><span class="highlight"></span> <span class="bar"></span>
                                 <!-- Trigger the modal with a button -->
                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                                <div>
+                                    @foreach (json_decode($attraction->image) as $image)
+                                        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+                                            <img src="{{ $image }}" class="img-responsive">
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
 
                             <div class="form-group m-b-40">
                                 <label for="video">ویدئو</label>
                                 <input type="file" class="form-control" id="video" name="video"><span class="highlight"></span> <span class="bar"></span>
-                                <video src="{{ $attraction->video }}"></video>
+                                <video width="320" height="240" controls>
+                                    <source src="{{ $attraction->video }}" type="video/mp4">
+                                </video>
                             </div>
 
                             <div id="googleMap" style="width:100%;height:400px;"></div>

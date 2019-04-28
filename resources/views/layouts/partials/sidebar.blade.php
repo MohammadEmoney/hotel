@@ -43,6 +43,8 @@
             <li><a href="{{ route('city.index')}}"><i class="fa fa-circle-o"></i>شهرها</a></li>
             <li><a href="{{ route('area.index')}}"><i class="fa fa-circle-o"></i>محله ها</a></li>
             <li><a href="{{ route('attraction.index')}}"><i class="fa fa-circle-o"></i> جاذبه ها</a></li>
+            <li><a href="{{ route('room-type.index')}}"><i class="fa fa-circle-o"></i> نوع اتاق ها</a></li>
+            <li><a href="{{ route('bed-type.index')}}"><i class="fa fa-circle-o"></i> نوع تخت ها</a></li>
           </ul>
         </li>
         <li>
@@ -68,7 +70,7 @@
             <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> مدال</a></li>
           </ul>
         </li>
-        
+
       </ul>
     </section>
     <!-- /.sidebar -->

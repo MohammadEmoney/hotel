@@ -25,6 +25,7 @@ Route::namespace('Admin')->prefix('admin')->group(function (){
     Route::resource('attraction', 'AttractionController');
     Route::resource('room', 'RoomController');
     Route::resource('room-type', 'RoomTypeController');
+    Route::resource('bed-type', 'BedTypeController');
     Route::resource('users', 'UserController');
 });
 

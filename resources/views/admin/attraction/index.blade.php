@@ -53,10 +53,10 @@
                         <td>{{ $attraction->long }}</td>
                         <td class="pull-left d-flex">
                             <a href="{{ route('attraction.edit', ['id' => $attraction->id]) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('attraction.destroy', ['id' => $attraction->id]) }}" class="delete-form">
+                            <form action="{{ route('attraction.destroy', ['id' => $attraction->id]) }}" method="POST" class="delete-form">
                                 @csrf
                                 @method('DELETE')
-                                <a type="submit" class="btn btn-danger ml-2">Delete</a>
+                                <button type="submit" class="btn btn-danger ml-2">Delete</button>
                             </form>
                         </td>
                     </tr>

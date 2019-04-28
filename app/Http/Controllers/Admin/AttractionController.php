@@ -102,14 +102,36 @@ class AttractionController extends Controller
         $this->validate(request(), [
             'name_fa'       => 'required',
             'name_en'       => 'required',
-            'image'         => 'image|max:3072', //maximum size 3MB
-            'video'         => 'mimetypes:video/avi,video/mpeg,video/quicktime|max:10240', //Maximum size 10MB
+            'image'         => 'required',
+            'image.*'       => 'image|mimes:jpeg,png,jpg,gif,svg|max:3078', //Maximum size 3MB
+            'video'         => 'mimes:mp4,mov,ogg|max:10240', //Maximum size 10MB
             'description'   => 'required',
-            'lat'           => 'required',
-            'lat'           => 'required',
         ]);
 
+        if(request('image')){
+            $img = json_encode(uploadFile($request->image, Attraction::class));
+            foreach(json_decode($attraction->image) as $image){
+                if(file_exists ($image)){
+                    unlink(ltrim($image, "/"));
+                }
+            }
+        }else{
+            $img = $attraction->image;
+        }
+
+        if(request('video')){
+            $video = uploadVideo($request->video, Attraction::class);
+            if(file_exists ($image)){
+                unlink(ltrim($attraction->video, "/"));
+            }
+        }else{
+            $video = $attraction->video;
+        }
+
         $data = $request->all();
+        $data['image'] = $img;
+        $data['video'] = $video;
+        $attraction->update($data);
         return redirect()->route('attraction.index');
     }
 
@@ -121,6 +143,10 @@ class AttractionController extends Controller
      */
     public function destroy(Attraction $attraction)
     {
+        foreach(json_decode($attraction->image) as $image){
+            unlink(ltrim($image, "/"));
+        }
+        unlink(ltrim($attraction->video, "/"));
         $attraction->delete();
         return redirect()->route('attraction.index');
     }
