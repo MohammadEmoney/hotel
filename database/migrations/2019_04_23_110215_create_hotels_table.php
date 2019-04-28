@@ -18,12 +18,14 @@ class CreateHotelsTable extends Migration
             $table->string('name_fa');
             $table->string('name_en');
             $table->string('slug');
-            $table->string('image');
+            $table->text('image');
             $table->string('video');
             $table->text('description');
+            $table->float('lat', 10, 7);
+            $table->float('long', 10, 7);
             $table->integer('city_id');
             $table->integer('country_id');
-            $table->string('rates');
+            $table->integer('rates');
             $table->integer('area_id');
             $table->integer('attractions_id');
             $table->integer('provider_id');

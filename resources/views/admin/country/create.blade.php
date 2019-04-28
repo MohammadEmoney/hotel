@@ -27,6 +27,16 @@
                 </div>
                 <!-- /.box-header -->
                     <!-- form start -->
+                    {{-- Erorr messages --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form id="update_profile" class="floating-labels" method="post" action="{{ route('country.store') }}" enctype="multipart/form-data">
                         <div class="box-body">
                             {{ csrf_field() }}

@@ -9,6 +9,7 @@ use App\Country;
 use App\City;
 use App\Area;
 use App\Provider;
+use App\Attraction;
 
 class HotelController extends Controller
 {
@@ -34,7 +35,8 @@ class HotelController extends Controller
         $cities = City::all();
         $areas = Area::all();
         $providers = Provider::all();
-        return view('admin.hotel.create', compact('countries', 'cities', 'areas', 'providers'));
+        $attractions = Attraction::all();
+        return view('admin.hotel.create', compact('countries', 'cities', 'areas', 'providers', 'attractions'));
     }
 
     /**
@@ -49,32 +51,39 @@ class HotelController extends Controller
             'name_fa'       => 'required',
             'name_en'       => 'required',
             'description'   => 'required',
-            'image'         => 'image|max:3072', //Image Maximum Size 3MB
-            'video'         => 'mime:mp4,mov,ogg|max:10240', //Image Maximum Size 10MB
+            'image'         => 'required',
+            'image.*'       => 'image|mimes:jpeg,png,jpg,gif,svg|max:3078', //Maximum size 3MB
+            'video'         => 'mimes:mp4,mov,ogg|max:10240', //Image Maximum Size 10MB
         ]);
 
         if($request->hasFile('image')){
-            $className = Attraction::class;
+            $className = Hotel::class;
             $images = json_encode(uploadFile($request->image, $className));
         }
         if($request->hasFile('video')){
-            $className = Attraction::class;
+            $className = Hotel::class;
             $video = uploadVideo($request->video, $className);
         }
 
+        if (request('provider_id')){
+            foreach(request('provider_id') as $provider_id){
+                //
+            }
+        }
+
         $data = [
-            'name_fa'       => requset('name_fa'),
-            'name_en'       => requset('name_en'),
-            'slug'          => requset('slug'),
-            'lat'           => requset('lat'),
-            'long'          => requset('long'),
-            'description'   => requset('description'),
+            'name_fa'       => request('name_fa'),
+            'name_en'       => request('name_en'),
+            'slug'          => request('slug'),
+            'lat'           => request('lat'),
+            'long'          => request('long'),
+            'description'   => request('description'),
             'image'         => $images,
             'video'         => $video,
             'area_id'       => request('area_id'),
             'city_id'       => request('city_id'),
             'country_id'    => request('country_id'),
-            'attraction_id' => request('attraction_id'),
+            'attractions_id' => request('attractions_id'),
             'provider_id'   => request('provider_id'),
         ];
 

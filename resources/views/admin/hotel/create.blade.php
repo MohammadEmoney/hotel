@@ -27,6 +27,16 @@
                 </div>
                 <!-- /.box-header -->
                     <!-- form start -->
+                    {{-- Error messages --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form id="update_profile" class="floating-labels" method="post" action="{{ route('hotel.store') }}" enctype="multipart/form-data">
                         <div class="box-body">
                             {{ csrf_field() }}
@@ -85,6 +95,15 @@
                             </div>
 
                             <div class="form-group m-b-40">
+                                <label for="attraction">جاذبه ها</label>
+                                <select name="attractions_id[]" class="form-control" id="attraction" multiple>
+                                    @foreach ($attractions as $attraction)
+                                        <option value="{{ $attraction->id }}">{{ $attraction->name_fa }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group m-b-40">
                                 <label for="image">تصاویر</label>
                                 <input type="file" class="form-control" id="image" name="image[]" multiple><span class="highlight"></span> <span class="bar"></span>
                             </div>
@@ -119,26 +138,26 @@
     <script>
         $(document).ready(function () {
             $('#name_en').on('keyup', () => {
-                $value =  $('#name').val();
+                $value =  $('#name_en').val();
                 $slug = $value.replace(/\s/gm, '-');
                 $('#slug').val($slug);
             });
+
+
+            function myMap() {
+                var mapProp= {
+                    center:new google.maps.LatLng(51.508742,-0.120850),
+                    zoom:5,
+                };
+                var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+                google.maps.event.addListener(map, 'click', function(event) {
+                    $("#lat").val(event.latLng.lat());
+                    $("#long").val(event.latLng.lng());
+                // alert(event.latLng.lat() + ", " + event.latLng.lng());
+                });
+            }
         });
-
-        function myMap() {
-        var mapProp= {
-            center:new google.maps.LatLng(51.508742,-0.120850),
-            zoom:5,
-        };
-        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-        google.maps.event.addListener(map, 'click', function(event) {
-            $("#lat").val(event.latLng.lat());
-            $("#long").val(event.latLng.lng());
-        // alert(event.latLng.lat() + ", " + event.latLng.lng());
-        });
-
-        }
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=myMap"></script>

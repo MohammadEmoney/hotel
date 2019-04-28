@@ -14,7 +14,7 @@ class Hotel extends Model
         'city_id',
         'country_id',
         'provider_id',
-        'attraction_id',
+        'attractions_id',
         'description',
         'lat',
         'long',

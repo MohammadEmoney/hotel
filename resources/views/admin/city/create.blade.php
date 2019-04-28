@@ -27,6 +27,7 @@
                 </div>
                 <!-- /.box-header -->
                     <!-- form start -->
+                    {{-- Erorr messages --}}
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
