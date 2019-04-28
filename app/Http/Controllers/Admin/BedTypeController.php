@@ -66,7 +66,7 @@ class BedTypeController extends Controller
      */
     public function edit(BedType $bedType)
     {
-        //
+        return view('admin.bedtype.edit', compact('bedType'));
     }
 
     /**
@@ -78,7 +78,15 @@ class BedTypeController extends Controller
      */
     public function update(Request $request, BedType $bedType)
     {
-        //
+        $this->validate(request(), [
+            'type' => 'required'
+        ]);
+
+        $data = [
+            'type' => $request->type
+        ];
+        $bedType->update($data);
+        return redirect()->route('bed-type.index');
     }
 
     /**
@@ -89,6 +97,7 @@ class BedTypeController extends Controller
      */
     public function destroy(BedType $bedType)
     {
-        //
+        $bedType->delete();
+        return redirect()->route('bed-type.index');
     }
 }

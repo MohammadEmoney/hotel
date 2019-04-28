@@ -37,7 +37,7 @@
                         <td>{{ $type->type }} </td>
                         <td class="pull-left d-flex">
                             <a href="{{ route('bed-type.edit', ['id' => $type->id]) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('bed-type.destroy', ['id' => $type->id]) }}" class="delete-form">
+                            <form action="{{ route('bed-type.destroy', ['id' => $type->id]) }}" class="delete-form" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <a type="submit" class="btn btn-danger ml-2">Delete</a>
