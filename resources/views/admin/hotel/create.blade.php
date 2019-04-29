@@ -12,7 +12,7 @@
         </h1>
         <ol class="breadcrumb">
           <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> خانه</a></li>
-          <li ><a href="{{ route('city.index') }}">هتل ها</a></li>
+          <li ><a href="{{ route('hotel.index') }}">هتل ها</a></li>
           <li class="active">افزودن هتل</li>
         </ol>
       </section>

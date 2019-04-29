@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\BedType;
+use App\RoomType;
+use App\Hotel;
 
 class RoomController extends Controller
 {
@@ -13,9 +16,10 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Hotel $hotel)
     {
-        return view('admin.room.index');
+        $rooms = Room::all();
+        return view('admin.room.index', compact('rooms', 'hotel'));
     }
 
     /**
@@ -23,9 +27,11 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Hotel $hotel)
     {
-        return view('admin.room.create');
+        $bedTypes = BedType::all();
+        $roomTypes = RoomType::all();
+        return view('admin.room.create', compact('roomTypes', 'bedTypes', 'hotel'));
     }
 
     /**
@@ -34,7 +40,7 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Hotel $hotel)
     {
         $this->validate(request(), [
             'type'      => 'requierd',
@@ -42,8 +48,11 @@ class RoomController extends Controller
         ]);
 
         $data = [
+            'hotel_id'  => $hotel->id,
             'type'      => request('type'),
-            'capacity'  => request('capacity')
+            'capacity'  => request('capacity'),
+            'currency'  => request('currency'),
+            'price'     => request('price')
         ];
 
         Room::create($data);

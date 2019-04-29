@@ -9,4 +9,8 @@ class Attraction extends Model
     protected $fillable = [
         'name_fa', 'name_en', 'description', 'lat', 'long', 'image', 'video', 'slug'
     ];
+
+    public function hotel(){
+        return $this->belongsToMany(Hotel::class);
+    }
 }

@@ -23,6 +23,10 @@ class Hotel extends Model
         'rates'
     ];
 
+    public function room(){
+        return $this->hasMany(Room::class);
+    }
+
     public function city(){
         return $this->belongsTo(City::class);
     }
@@ -37,5 +41,9 @@ class Hotel extends Model
 
     public function provider(){
         return $this->hasMany(Provider::class);
+    }
+
+    public function attraction(){
+        return $this->hasMany(Attraction::class);
     }
 }

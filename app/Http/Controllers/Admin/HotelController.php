@@ -59,16 +59,26 @@ class HotelController extends Controller
         if($request->hasFile('image')){
             $className = Hotel::class;
             $images = json_encode(uploadFile($request->image, $className));
+        }else{
+            $images = '';
         }
+
         if($request->hasFile('video')){
             $className = Hotel::class;
             $video = uploadVideo($request->video, $className);
+        }else{
+            $video = '';
         }
 
         if (request('provider_id')){
             foreach(request('provider_id') as $provider_id){
                 //
             }
+        }
+
+
+        foreach($request->attractions_id as $attraction_id){
+            //
         }
 
         $data = [

@@ -18,9 +18,9 @@ class CreateAttractionsTable extends Migration
             $table->string('name_fa');
             $table->string('name_en');
             $table->string('slug');
-            $table->text('description');
-            $table->string('image');
-            $table->string('video');
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->string('video')->nullable();
             $table->float('lat', 10, 7);
             $table->float('long', 10, 7);
             $table->timestamps();

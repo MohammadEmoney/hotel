@@ -23,7 +23,16 @@ Route::namespace('Admin')->prefix('admin')->group(function (){
     Route::resource('country', 'CountryController');
     Route::resource('area', 'AreaController');
     Route::resource('attraction', 'AttractionController');
-    Route::resource('room', 'RoomController');
+    // Route::resource('room', 'RoomController');
+
+    //Hotel Room
+    Route::get('hotel/{hotel}/room', 'RoomController@index')->name('hotel.room.index');
+    Route::get('hotel/{hotel}/create', 'RoomController@create')->name('hotel.room.create');
+    Route::post('hotel/{hotel}/create', 'RoomController@store')->name('hotel.room.store');
+    Route::get('hotel/{hotel}/edit/{room}', 'RoomController@edit')->name('hotel.room.edit');
+    Route::post('hotel/{hotel}/edit/{room}', 'RoomController@update')->name('hotel.room.update');
+    Route::post('hotel/{hotel}/edit/{room}', 'RoomController@destroy')->name('hotel.room.destroy');
+
     Route::resource('room-type', 'RoomTypeController');
     Route::resource('bed-type', 'BedTypeController');
     Route::resource('users', 'UserController');

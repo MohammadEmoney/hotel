@@ -49,11 +49,17 @@ class AttractionController extends Controller
         if($request->hasFile('image')){
             $className = Attraction::class;
             $images = json_encode(uploadFile($request->image, $className));
+        }else{
+            $images = '';
         }
+
         if($request->hasFile('video')){
             $className = Attraction::class;
             $video = uploadVideo($request->video, $className);
+        }else{
+            $video = '';
         }
+
         $data = [
             'name_fa'       => request('name_fa'),
             'name_en'       => request('name_en'),

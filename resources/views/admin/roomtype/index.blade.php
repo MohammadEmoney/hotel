@@ -12,7 +12,6 @@
         </h1>
         <ol class="breadcrumb">
           <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> خانه</a></li>
-          <li><a href="{{ route('room.index') }}">اطلاعات اتاق ها</a></li>
           <li class="active">نوع اتاق</li>
         </ol>
       </section>
@@ -36,7 +35,7 @@
                         <td>{{ $type->type }} </td>
                         <td class="pull-left d-flex">
                             <a href="{{ route('room-type.edit', ['id' => $type->id]) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('room-type.destroy', ['id' => $type->id]) }}" class="delete-form">
+                            <form action="{{ route('room-type.destroy', ['id' => $type->id]) }}" class="delete-form" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <a type="submit" class="btn btn-danger ml-2">Delete</a>
