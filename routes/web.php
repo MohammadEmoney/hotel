@@ -23,6 +23,7 @@ Route::namespace('Admin')->prefix('admin')->group(function (){
     Route::resource('country', 'CountryController');
     Route::resource('area', 'AreaController');
     Route::resource('attraction', 'AttractionController');
+    Route::resource('rate', 'RateController');
     // Route::resource('room', 'RoomController');
 
     //Hotel Room

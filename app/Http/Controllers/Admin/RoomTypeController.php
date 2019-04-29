@@ -39,10 +39,8 @@ class RoomTypeController extends Controller
      */
     public function store(Request $request)
     {
-        dd(request('capacity'));
         $this->validate(request(), [
             'type'      => 'required',
-            'capacity'  => 'required'
         ]);
 
         $data = [
@@ -50,7 +48,7 @@ class RoomTypeController extends Controller
             'capacity'  => request('capacity')
         ];
         RoomType::create($data);
-        return redirect()->route('room-typ.index');
+        return redirect()->route('room-type.index');
     }
 
     /**
@@ -90,7 +88,7 @@ class RoomTypeController extends Controller
         ]);
         $data = $request->all();
         $roomType->update($data);
-        return redirect()->route('room-typ.index');
+        return redirect()->route('room-type.index');
     }
 
     /**
@@ -102,6 +100,6 @@ class RoomTypeController extends Controller
     public function destroy(RoomType $roomType)
     {
         $roomType->delete();
-        return redirect()->route('room-typ.index');
+        return redirect()->route('room-type.index');
     }
 }

@@ -41,10 +41,10 @@
                         <div class="box-body">
                             {{ csrf_field() }}
                             <div class="form-group m-b-40">
-                                <label for="name_fa">نوع اتاق</label>
-                                <input type="text" class="form-control" id="name_fa" name="name_fa" value="{{ old('name_fa') }}" required><span class="highlight"></span> <span class="bar"></span>
+                                <label for="type">نوع اتاق</label>
+                                <input type="text" class="form-control" id="type" name="type" value="{{ old('type') }}" required><span class="highlight"></span> <span class="bar"></span>
                             </div>
-                            <div class="form-group m-b-40">
+                            {{-- <div class="form-group m-b-40">
                                 <label for="name_en">نوع تخت ها</label>
                                 <div>
                                     @foreach($bed_types as $bed_type)
@@ -52,7 +52,7 @@
                                         <label class="custom-control-label" name="capacity[]" for="{{ $bed_type->id }}">{{ $bed_type->type }}</label>
                                     @endforeach
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div> <!-- /.box-body -->
                         <div class="box-footer">

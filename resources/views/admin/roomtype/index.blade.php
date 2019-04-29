@@ -18,8 +18,8 @@
 @endsection
 
 @section('content')
-<div class="container">
-<a href="{{ route('room-type.create') }}" class="btn btn-primary">add</a>
+    <div class="container">
+        <a href="{{ route('room-type.create') }}" class="btn btn-primary">add</a>
         <table id="product-table" class="table">
             <thead>
             <tr>
@@ -38,7 +38,7 @@
                             <form action="{{ route('room-type.destroy', ['id' => $type->id]) }}" class="delete-form" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a type="submit" class="btn btn-danger ml-2">Delete</a>
+                                <button type="submit" class="btn btn-danger ml-2">حذف</a>
                             </form>
                         </td>
                     </tr>

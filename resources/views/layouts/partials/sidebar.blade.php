@@ -53,6 +53,12 @@
           </a>
         </li>
 
+        <li>
+        <a href="{{ route('rate.index') }}">
+            <i class="fa fa-th"></i> <span>نرخ ارز</span>
+            </a>
+        </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
