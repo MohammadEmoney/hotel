@@ -42,8 +42,8 @@
                         <td>{{ $area->lat }}</td>
                         <td>{{ $area->long }}</td>
                         <td class="pull-left d-flex">
-                            <a href="{{ route('area.edit', ['id' => $area->id]) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('area.destroy', ['id' => $area->id]) }}" class="delete-form">
+                            <a href="{{ route('area.edit', ['id' => $area->id]) }}" class="table-btn btn btn-warning">Edit</a>
+                            <form action="{{ route('area.destroy', ['id' => $area->id]) }}" class="table-btn delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <a type="submit" class="btn btn-danger ml-2">Delete</a>

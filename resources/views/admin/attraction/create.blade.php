@@ -163,6 +163,5 @@
 
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=myMap"></script>
 @endsection
 

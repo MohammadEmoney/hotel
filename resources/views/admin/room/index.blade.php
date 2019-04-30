@@ -37,11 +37,11 @@
                             <a href="{{ route('hotel.room.edit', [
                                 'hotel-id' => $hotel->id,
                                 'room-id' => $room->id
-                                ]) }}" class="btn btn-warning">Edit</a>
+                                ]) }}" class="table-btn btn btn-warning">Edit</a>
                             <form action="{{ route('hotel.room.destroy', ['id' => $room->id]) }}" class="delete-form">
                                 @csrf
                                 @method('DELETE')
-                                <a type="submit" class="btn btn-danger ml-2">Delete</a>
+                                <button type="submit" class="table-btn btn btn-danger ml-2">Delete</button>
                             </form>
                         </td>
                     </tr>

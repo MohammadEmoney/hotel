@@ -77,9 +77,7 @@ class HotelController extends Controller
         }
 
 
-        foreach($request->attractions_id as $attraction_id){
-            //
-        }
+
 
         $data = [
             'name_fa'       => request('name_fa'),
@@ -93,11 +91,13 @@ class HotelController extends Controller
             'area_id'       => request('area_id'),
             'city_id'       => request('city_id'),
             'country_id'    => request('country_id'),
-            'attractions_id' => request('attractions_id'),
             'provider_id'   => request('provider_id'),
         ];
 
-        Hotel::create($data);
+        $hotel = Hotel::create($data);
+        foreach($request->attractions_id as $attraction_id){
+            $hotel->attraction()->sync($attraction_id);
+        }
         return redirect()->route('hotel.index');
     }
 

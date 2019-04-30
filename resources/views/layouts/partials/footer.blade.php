@@ -35,4 +35,6 @@
 <script src="{{ asset('panel/dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('panel/dist/js/demo.js') }}"></script>
+
 @yield('scripts')
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=myMap"></script>

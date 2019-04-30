@@ -37,10 +37,6 @@ class CreateHotelsTable extends Migration
             $table->foreign('area_id')->references('id')
                 ->on('areas')->onDelete('cascade');
 
-            $table->integer('attractions_id')->unsigned()->nullable();
-            $table->foreign('attractions_id')->references('attraction_id')
-                ->on('attraction_hotel')->onDelete('cascade');
-
             $table->integer('provider_id')->unsigned()->nullable();
             $table->foreign('provider_id')->references('id')
                 ->on('providers')->onDelete('cascade');

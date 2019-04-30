@@ -40,11 +40,11 @@
                         <td>{{ $country->lat }}</td>
                         <td>{{ $country->long }}</td>
                         <td class="pull-left d-flex">
-                        <a href="{{ route('country.edit', ['id' => $country->id]) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('country.edit', ['id' => $country->id]) }}" class="table-btn btn btn-warning">Edit</a>
                             <form action="{{ route('country.destroy', ['id' => $country->id]) }}" class="delete-form">
                                 @csrf
                                 @method('DELETE')
-                                <a type="submit" class="btn btn-danger ml-2">Delete</a>
+                                <button type="submit" class="table-btn btn btn-danger ml-2">Delete</button>
                             </form>
                         </td>
                     </tr>

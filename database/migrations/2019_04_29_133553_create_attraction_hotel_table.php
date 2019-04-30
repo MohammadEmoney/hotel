@@ -15,8 +15,20 @@ class CreateAttractionHotelTable extends Migration
     {
         Schema::create('attraction_hotel', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('attraction_id');
-            $table->unsignedBigInteger('hotel_id');
+
+            $table->integer('hotel_id')->unsigned();
+            $table->foreign('hotel_id')
+                ->references('id')
+                ->on('hotels')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->integer('attraction_id')->unsigned();
+            $table->foreign('attraction_id')
+                ->references('id')
+                ->on('attractions')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }

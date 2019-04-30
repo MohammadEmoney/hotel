@@ -34,9 +34,9 @@
                         <td>{{ $hotel->id }}</td>
                         <td>{{ $hotel->name_fa }} | {{ $hotel->city->name_fa }} - {{ $hotel->area->name_fa }}</td>
                         <td class="pull-left d-flex">
-                            <a href="{{ route('hotel.edit', ['id' => $hotel->id]) }}" class="btn btn-warning">Edit</a>
-                            <a href="{{ route('hotel.room.index', ['id' => $hotel->id]) }}" class="btn btn-success">اطلاعات اتاق ها</a>
-                            <form action="{{ route('hotel.destroy', ['id' => $hotel->id]) }}" class="delete-form">
+                            <a href="{{ route('hotel.edit', ['id' => $hotel->id]) }}" class="table-btn btn btn-warning">Edit</a>
+                            <a href="{{ route('hotel.room.index', ['id' => $hotel->id]) }}" class="table-btn btn btn-success">اطلاعات اتاق ها</a>
+                            <form action="{{ route('hotel.destroy', ['id' => $hotel->id]) }}" class="table-btn delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <a type="submit" class="btn btn-danger ml-2">Delete</a>

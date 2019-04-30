@@ -34,11 +34,11 @@
                         <td>{{ $type->id }}</td>
                         <td>{{ $type->type }} </td>
                         <td class="pull-left d-flex">
-                            <a href="{{ route('room-type.edit', ['id' => $type->id]) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('room-type.edit', ['id' => $type->id]) }}" class="table-btn btn btn-warning">Edit</a>
                             <form action="{{ route('room-type.destroy', ['id' => $type->id]) }}" class="delete-form" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger ml-2">حذف</a>
+                                <button type="submit" class="table-btn btn btn-danger ml-2">حذف</a>
                             </form>
                         </td>
                     </tr>

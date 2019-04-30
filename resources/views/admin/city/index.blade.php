@@ -42,11 +42,11 @@
                         <td>{{ $city->lat }}</td>
                         <td>{{ $city->long }}</td>
                         <td class="pull-left d-flex">
-                            <a href="{{ route('city.edit', ['id' => $city->id]) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('city.edit', ['id' => $city->id]) }}" class="table-btn btn btn-warning">Edit</a>
                             <form action="{{ route('city.destroy', ['id' => $city->id]) }}" class="delete-form">
                                 @csrf
                                 @method('DELETE')
-                                <a type="submit" class="btn btn-danger ml-2">Delete</a>
+                                <button type="submit" class="table-btn btn btn-danger ml-2">Delete</button>
                             </form>
                         </td>
                     </tr>

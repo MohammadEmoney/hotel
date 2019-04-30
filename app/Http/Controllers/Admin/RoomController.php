@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\BedType;
 use App\RoomType;
 use App\Hotel;
+use App\Rate;
 
 class RoomController extends Controller
 {
@@ -31,7 +32,8 @@ class RoomController extends Controller
     {
         $bedTypes = BedType::all();
         $roomTypes = RoomType::all();
-        return view('admin.room.create', compact('roomTypes', 'bedTypes', 'hotel'));
+        $rates = Rate::all();
+        return view('admin.room.create', compact('roomTypes', 'bedTypes', 'hotel', 'rates'));
     }
 
     /**

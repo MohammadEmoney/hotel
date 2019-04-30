@@ -44,6 +44,6 @@ class Hotel extends Model
     }
 
     public function attraction(){
-        return $this->hasMany(Attraction::class);
+        return $this->belongsToMany(Attraction::class);
     }
 }

@@ -60,8 +60,12 @@
                                 </div>
                             </div>
                             <div class="form-group m-b-40">
-                                <label for="currency">نوع ارز</label>
-                                <input type="text" class="form-control" id="currency" name="currency" value="{{ old('currency') }}" required><span class="highlight"></span> <span class="bar"></span>
+                                <label for="currency_id">نوع ارز</label>
+                                <select name="currency_id" class="form-control" id="bedType">
+                                    @foreach ($rates as $rate)
+                                        <option value="{{ $rate->id }}">{{ $rate->currency }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group m-b-40">
                                 <label for="price">قیمت</label>

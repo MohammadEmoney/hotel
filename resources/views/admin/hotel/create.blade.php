@@ -142,23 +142,20 @@
                 $slug = $value.replace(/\s/gm, '-');
                 $('#slug').val($slug);
             });
-
-
-            function myMap() {
-                var mapProp= {
-                    center:new google.maps.LatLng(51.508742,-0.120850),
-                    zoom:5,
-                };
-                var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-                google.maps.event.addListener(map, 'click', function(event) {
-                    $("#lat").val(event.latLng.lat());
-                    $("#long").val(event.latLng.lng());
-                // alert(event.latLng.lat() + ", " + event.latLng.lng());
-                });
-            }
         });
-    </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=myMap"></script>
+        function myMap() {
+            var mapProp= {
+                center:new google.maps.LatLng(51.508742,-0.120850),
+                zoom:5,
+            };
+            var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                $("#lat").val(event.latLng.lat());
+                $("#long").val(event.latLng.lng());
+            // alert(event.latLng.lat() + ", " + event.latLng.lng());
+            });
+        }
+    </script>
 @endsection

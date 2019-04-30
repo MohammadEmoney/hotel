@@ -42,6 +42,12 @@ class RoomTypeController extends Controller
         $this->validate(request(), [
             'type'      => 'required',
         ]);
+        // dd($request->capacity);
+        $bed_types = [];
+        foreach(request('capacity') as $capacity){
+            var_dump($capacity);
+        }
+        dd('hi');
 
         $data = [
             'type'      => request('type'),
